@@ -3,6 +3,10 @@ from jobMatcher import *
 fullJobs = matchmaker()
 allnames = []
 for job in fullJobs:
-    allnames.extend(job.getMatches())
-    print job.name,':',job.getMatches()
+    people = job.getMatches()
+    names = []
+    for person in people:
+        names.append(person.name)
+    allnames.extend(names)
+    print job.name,':',names
 print sorted(allnames)

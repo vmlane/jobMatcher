@@ -1,36 +1,76 @@
 import copy
 from person import Person
 from job import Job
-
-sunday = Job('sunday', ['amber', 'lisa', 'ana','matt', 'rob', 'kyle', 'kevin', 'abi', 'amy', 'jack', 'hope', 'mike'])
-monday = Job('monday', ['abi', 'kevin', 'rob', 'matt','amy', 'amber', 'lisa', 'kyle', 'jack','ana', 'hope', 'mike'])
-tuesday = Job('tuesday',  ['rob', 'hope', 'abi', 'matt','lisa', 'jack', 'kevin', 'kyle', 'ana', 'amber', 'amy', 'mike'])
-wednesday = Job('wednesday',  ['hope', 'kevin', 'abi', 'lisa', 'jack','ana', 'kyle', 'amy','matt', 'mike', 'rob', 'amber'])
-thursday = Job('thursday',  ['amy', 'kyle', 'lisa', 'mike', 'hope', 'kevin', 'amber','matt', 'ana', 'jack', 'rob', 'abi'])
-studybreak = Job('studybreak',  ['jack','amy', 'kyle', 'lisa', 'amber', 'ana', 'rob', 'abi', 'matt', 'mike', 'hope', 'kevin'])
-staples = Job('staples',  ['rose','vero','jaz','raul','jose','jack','amy', 'kyle', 'lisa', 'amber', 'ana', 'rob', 'abi', 'matt', 'mike', 'hope', 'kevin'],3)
-kitchenMonster = Job('kitchenMonster',  ['rose','vero','jaz','raul','jose','jack','amy', 'kyle', 'lisa', 'amber', 'ana', 'rob', 'abi', 'matt', 'mike', 'hope', 'kevin'],1)
-loungeMonster = Job('loungeMonster',  ['rose','vero','jaz','raul','jose','jack','amy', 'kyle', 'lisa', 'amber', 'ana', 'rob', 'abi', 'matt', 'mike', 'hope', 'kevin'],1)
+from pair import *
+from cookingjob import *
+from noncookingjob import *
 
 
-abi = Person('abi',['tuesday', 'monday', 'thursday', 'sunday'])
-ana = Person('ana', ['tuesday', 'monday', 'wednesday', 'thursday', 'sunday'])
-rob = Person('rob', ['tuesday', 'sunday', 'wednesday', 'monday', 'thursday'])
-lisa = Person('lisa', ['wednesday', 'monday', 'thursday', 'tuesday', 'sunday'])
-kevin = Person('kevin', ['thursday', 'monday', 'wednesday', 'sunday', 'tuesday'])
-kyle = Person('kyle', ['tuesday', 'monday', 'sunday', 'studybreak','thursday', 'wednesday'])
-mike = Person('mike', ['tuesday', 'monday', 'studybreak','wednesday', 'sunday', 'thursday'])
-hope = Person('hope', ['tuesday', 'monday', 'thursday', 'sunday', 'wednesday'])
-amy = Person('amy', ['wednesday', 'tuesday', 'monday', 'sunday'])
-amber = Person('amber', ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday'])
-matt = Person('matt', ['wednesday','studybreak', 'tuesday', 'monday', 'sunday'])
-jack = Person('jack', ['studybreak', 'thursday','sunday', 'monday', 'tuesday', 'wednesday'])
-rose = Person('rose', ['staples','kitchenMonster','loungeMonster', 'sunday', 'tuesday', 'monday', 'thursday', 'wednesday'])
-vero = Person('vero', ['loungeMonster','staples','kitchenMonster','sunday','monday','wednesday' ])
-jaz = Person('jaz', ['staples','loungeMonster','kitchenMonster','sunday'])
-raul = Person('raul', ['kitchenMonster','staples', 'tuesday', 'monday', 'sunday'])
-jose = Person('jose', ['studybreak','loungeMonster','staples','thursday','sunday', 'monday', 'tuesday', 'wednesday'])
+abi = Person('abi', 0,
+    ['tuesday', 'monday', 'thursday', 'sunday'],
+    { 'sunday': 4.5, 'monday': 4.0, 'tuesday': 3, 'wednesday': 4.15, 'thursday': 3.5, 'studybreak': 10 },
+    True
+    )
+ana = Person('ana', 1,
+    ['tuesday', 'monday', 'wednesday', 'thursday', 'sunday'],
+    { 'sunday': 3.5, 'monday': 4, 'tuesday': 3, 'wednesday': 4.15, 'thursday': 3.5, 'studybreak': 'minimal' })
+rob = Person('rob', 0,
+    ['tuesday', 'sunday', 'wednesday', 'monday', 'thursday'],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.0, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 'minimal' },
+    True)
+lisa = Person('lisa', 3,
+    ['wednesday', 'monday', 'thursday', 'tuesday', 'sunday'],
+    { 'sunday': 4.5, 'monday': 4.0, 'tuesday': 4.0, 'wednesday': 4, 'thursday': 4.15, 'studybreak': 'minimal' })
+kevin = Person('kevin', 2,
+    ['thursday', 'monday', 'wednesday', 'sunday', 'tuesday'],
+    { 'sunday': 4.0, 'monday': 4.15, 'tuesday': 4.15, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 'minimal' })
+kyle = Person('kyle', 4,
+    ['tuesday', 'monday', 'sunday', 'studybreak','thursday', 'wednesday'],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.0, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 10 })
+mike = Person('mike', 5,
+    ['tuesday', 'monday', 'studybreak','wednesday', 'sunday', 'thursday'],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.0, 'wednesday': 4.16, 'thursday': 4.15, 'studybreak': 10 })
+hope = Person('hope', 3,
+    ['tuesday', 'monday', 'thursday', 'sunday', 'wednesday'],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.0, 'wednesday': 4.20, 'thursday': 4.15, 'studybreak': 10 })
+amy = Person('amy', 5,
+    ['wednesday', 'tuesday', 'monday', 'sunday'],
+    { 'sunday': 4.15, 'monday': 4.5, 'tuesday': 4.0, 'wednesday': 4, 'thursday': 'minimal', 'studybreak': 'minimal' })
+amber = Person('amber', 3,
+    ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday'],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.15, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 'minimal' })
+matt = Person('matt', 5,
+    ['wednesday','studybreak', 'tuesday', 'monday', 'sunday'],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.15, 'wednesday': 4, 'thursday': 'minimal', 'studybreak': 10 })
+jack = Person('jack', 6,
+    ['studybreak', 'thursday','sunday', 'monday', 'tuesday', 'wednesday'],
+    { 'sunday': 5, 'monday': 4.0, 'tuesday': 4.0, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 10 })
+rose = Person('rose', 6,
+    ['staples','kitchenMonster','loungeMonster', 'sunday', 'tuesday', 'monday', 'thursday', 'wednesday'],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.5, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 'minimal' })
+vero = Person('vero', 5,
+    ['loungeMonster','staples','kitchenMonster','sunday','monday','wednesday' ],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.5, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 'minimal' })
+jaz = Person('jaz', 6,
+    ['staples','studybreak','loungeMonster','kitchenMonster','sunday'],
+    { 'sunday': 4.5, 'monday': 4.0, 'tuesday': 4.0, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 'minimal' })
+raul = Person('raul', 6,
+    ['kitchenMonster','studybreak','staples'],
+    { 'sunday': 'minimal', 'monday': 'minimal', 'tuesday': 'minimal', 'wednesday': 'minimal', 'thursday': 'minimal', 'studybreak': 10 })
+jose = Person('jose', 5,
+    ['studybreak','loungeMonster','staples','thursday','sunday', 'monday'],
+    { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 'minimal', 'wednesday': 'minimal', 'thursday': 3.5, 'studybreak': 10 })
+rauljose=Pair(matt,jose)
 
+sunday = CookingJob('sunday', [amber, lisa, ana, matt, rob, kyle, kevin, abi, amy, jack, hope, mike])
+monday = CookingJob('monday', [abi, kevin, rob, matt, amy, amber, lisa, kyle, jack, ana, hope, mike])
+tuesday = CookingJob('tuesday',  [rob, hope, abi, matt, lisa, jack, kevin, kyle, ana, amber, amy, mike])
+wednesday = CookingJob('wednesday',  [hope, kevin, abi, lisa, jack, ana, kyle, amy, matt, mike, rob, amber])
+thursday = CookingJob('thursday',  [amy, kyle, lisa, mike, hope, kevin, amber, matt, ana, jack, rob, abi])
+studybreak = CookingJob('studybreak',  [jack, amy, kyle, lisa, amber, ana, rob, abi, matt, mike, hope, kevin])
+staples = NoncookingJob('staples',  [rose, vero, jaz, raul, jose, jack, amy, kyle, lisa, amber, ana, rob, abi, matt, mike, hope, kevin],3)
+kitchenMonster = NoncookingJob('kitchenMonster',  [rose, vero, jaz, raul, jose, jack, amy, kyle, lisa, amber, ana, rob, abi, matt, mike, hope, kevin],1)
+loungeMonster = NoncookingJob('loungeMonster',  [rose, vero, jaz, raul, jose, jack, amy, kyle, lisa, amber, ana, rob, abi, matt, mike, hope, kevin],1)
 jobs = [sunday, monday, tuesday, wednesday, thursday, studybreak,staples,kitchenMonster,loungeMonster]
  
 people = [abi,ana,rob,lisa,kevin,kyle,mike,hope,amy,amber,matt,jack,rose,vero,jaz,raul,jose]
@@ -42,23 +82,22 @@ def matchmaker():
     while freeJobs:
         i = i+1
         job = freeJobs.pop(0)
-        person_name = job.pop()
-        person = getPerson(person_name)
+        print job.name
+        person = job.pop()
 
         if job.name in person.getPrefs():
             if person.isFree():
-                person.match(job.name)
-                job.match(person.name)
+                match(job,person)
                 print("  %s and %s" % (job.name, person.name))
             else:
                 # Person has job
                 if person.getMatchRank() > person.getJobRank(job.name):
-                    oldjob = getRemoveJob(freeJobs,fullJobs,person.getMatch())
+                    oldjob = person.getMatch()
+                    removeJob(freeJobs,fullJobs,oldjob)
                     # Person prefers new job offer
-                    person.match(job.name)
-                    job.match(person.name)
+                    match(job,person)
                     # old job has open spot
-                    oldjob.unmatch(person.name)
+                    oldjob.unmatch(person)
                     freeJobs.append(oldjob)
                     print("  %s quit %s for %s" % (person.name, oldjob.name, job.name))
 
@@ -70,42 +109,12 @@ def matchmaker():
             fullJobs.append(job)
     return fullJobs
  
-def getRemoveJob(jobs1,jobs2,name):
-    for job in jobs1:
-        if job.name == name:
-            jobs1.remove(job)
-            return job
-    for job in  jobs2:
-        if job.name == name:
-            jobs2.remove(job)
-            return job
-    else:
-        return None
-
-def getPerson(name):
-    for person in people:
-        if name == person.name:
-            return person
+def removeJob(jobs1,jobs2,job):
+    if job in jobs1:
+        jobs1.remove(job)
+    if job in jobs2:
+        jobs2.remove(job)
 
 def match(job,person):
-    person.match(job.name)
-    job.match(person.name)
-
-
-# print('\nEngagejobsts:')
-# engaged = matchmaker()
- 
-# print('\nCouples:')
-# print('  ' + ',\n  '.join('%s is matched to %s' % couple
-#                           for couple in sorted(engaged.items())))
-# print()
-#print('Engagejobst stability check PASSED'
-#      if check(engaged) else 'Engagejobst stability check FAILED')
- 
-#print('\n\nSwapping two old_jobs to introduce an error')
-#engaged[people[0]], engaged[people[1]] = engaged[people[1]], engaged[people[0]]
-#for person in people[:2]:
-#    print('  %s is now engaged to %s' % (person, engaged[person]))
-#print()
-#print('Engagejobst stability check PASSED'
-#      if check(engaged) else 'Engagejobst stability check FAILED')
+    person.match(job)
+    job.match(person)

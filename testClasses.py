@@ -44,7 +44,7 @@ print mike.isFree() == True
 print mike.getPrefs() == mikePrefs
 print mike.getJobRank('thursday') == 5
 print mike.getJobRank('fakeday') == float("inf")
-print mike.pop() == 'tuesday'
+print mike.pop().name == 'tuesday'
 mike.match(mike.pop())
 print mike.getMatchRank() == 1
 print mike.isFree() == False
