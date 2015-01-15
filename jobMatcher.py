@@ -43,7 +43,7 @@ matt = Person('matt', 5,
     ['wednesday','studybreak', 'tuesday', 'monday', 'sunday'],
     { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 4.15, 'wednesday': 4, 'thursday': 'minimal', 'studybreak': 10 })
 jack = Person('jack', 6,
-    ['studybreak', 'thursday','sunday', 'monday', 'tuesday', 'wednesday'],
+    ['staples','studybreak', 'thursday','sunday', 'monday', 'tuesday', 'wednesday'],
     { 'sunday': 5, 'monday': 4.0, 'tuesday': 4.0, 'wednesday': 4, 'thursday': 3.5, 'studybreak': 10 })
 rose = Person('rose', 6,
     ['staples','kitchenMonster','loungeMonster', 'sunday', 'tuesday', 'monday', 'thursday', 'wednesday'],
@@ -61,7 +61,7 @@ jose = Person('jose', 5,
     ['studybreak','loungeMonster','staples','thursday','sunday', 'monday'],
     { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 'minimal', 'wednesday': 'minimal', 'thursday': 3.5, 'studybreak': 10 })
 mattjose=Pair(matt,jose)
-people = [abi,ana,rob,lisa,kevin,kyle,mike,hope,amy,amber,matt,jack,rose,vero,jaz,raul,jose]
+people = [abi,ana,rob,lisa,kevin,kyle,mike,hope,amy,amber,jack,rose,vero,jaz,raul,mattjose]
 
 sunday = CookingJob('sunday', people[:])
 monday = CookingJob('monday', people[:])
@@ -82,10 +82,27 @@ def matchmaker():
     while freeJobs:
         i = i+1
         job = freeJobs.pop(0)
-        print job.name
-        person = job.pop()
+        try:
+            person = job.pop()
+        except IndexError:
+            freePeople = filter(lambda x: x.isFree(), people)
+            names = []
+            for p in freePeople:
+                names.append(p.name)
+            print names
+            allnames = []
+            freeJobs.append(job)
+            for job in freeJobs:
+                matches = job.getMatches()
+                names = []
+                for person in matches:
+                    names.append(person.name)
+                allnames.extend(names)
+                print 'Free',job.name,':',names
 
-        if job.name in person.getPrefs():
+            return fullJobs
+
+        if job.name in person.getPrefs() and job.canMatch(person):
             if person.isFree():
                 match(job,person)
                 print("  %s and %s" % (job.name, person.name))

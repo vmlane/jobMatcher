@@ -7,6 +7,7 @@ class Person:
 		self.myMatch = None
 		self.isNoob = isNoob
 		self.semsCooked = semsCooked
+		self.numPeople = 1
 	def isFree(self):
 		return self.myMatch is None
 	def getPrefs(self):

@@ -30,11 +30,10 @@ class Job:
 	def pop(self):
 		return self.possibilities.pop(0)
 	def match(self, person):
-		if isinstance(person, Pair):
-			self.numMatches += 2
-		else:
-			self.numMatches += 1
+		self.numMatches += person.numPeople
 		self.matches.append(person)
+	def canMatch(self, person):
+		return self.numMatches + person.numPeople <= self.maxMatches
 	def unmatch(self, person):
 		if isinstance(person, Pair):
 			self.numMatches -= 2
