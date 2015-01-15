@@ -60,20 +60,20 @@ raul = Person('raul', 6,
 jose = Person('jose', 5,
     ['studybreak','loungeMonster','staples','thursday','sunday', 'monday'],
     { 'sunday': 4.0, 'monday': 4.0, 'tuesday': 'minimal', 'wednesday': 'minimal', 'thursday': 3.5, 'studybreak': 10 })
-rauljose=Pair(matt,jose)
+mattjose=Pair(matt,jose)
+people = [abi,ana,rob,lisa,kevin,kyle,mike,hope,amy,amber,matt,jack,rose,vero,jaz,raul,jose]
 
-sunday = CookingJob('sunday', [amber, lisa, ana, matt, rob, kyle, kevin, abi, amy, jack, hope, mike])
-monday = CookingJob('monday', [abi, kevin, rob, matt, amy, amber, lisa, kyle, jack, ana, hope, mike])
-tuesday = CookingJob('tuesday',  [rob, hope, abi, matt, lisa, jack, kevin, kyle, ana, amber, amy, mike])
-wednesday = CookingJob('wednesday',  [hope, kevin, abi, lisa, jack, ana, kyle, amy, matt, mike, rob, amber])
-thursday = CookingJob('thursday',  [amy, kyle, lisa, mike, hope, kevin, amber, matt, ana, jack, rob, abi])
-studybreak = CookingJob('studybreak',  [jack, amy, kyle, lisa, amber, ana, rob, abi, matt, mike, hope, kevin])
-staples = NoncookingJob('staples',  [rose, vero, jaz, raul, jose, jack, amy, kyle, lisa, amber, ana, rob, abi, matt, mike, hope, kevin],3)
-kitchenMonster = NoncookingJob('kitchenMonster',  [rose, vero, jaz, raul, jose, jack, amy, kyle, lisa, amber, ana, rob, abi, matt, mike, hope, kevin],1)
-loungeMonster = NoncookingJob('loungeMonster',  [rose, vero, jaz, raul, jose, jack, amy, kyle, lisa, amber, ana, rob, abi, matt, mike, hope, kevin],1)
+sunday = CookingJob('sunday', people[:])
+monday = CookingJob('monday', people[:])
+tuesday = CookingJob('tuesday', people[:])
+wednesday = CookingJob('wednesday', people[:])
+thursday = CookingJob('thursday', people[:])
+studybreak = CookingJob('studybreak', people[:], latestArrival=10)
+staples = NoncookingJob('staples', people[:] ,3)
+kitchenMonster = NoncookingJob('kitchenMonster', people[:],1)
+loungeMonster = NoncookingJob('loungeMonster',  people[:],1)
 jobs = [sunday, monday, tuesday, wednesday, thursday, studybreak,staples,kitchenMonster,loungeMonster]
  
-people = [abi,ana,rob,lisa,kevin,kyle,mike,hope,amy,amber,matt,jack,rose,vero,jaz,raul,jose]
  
 def matchmaker():
     freeJobs = jobs[:]
