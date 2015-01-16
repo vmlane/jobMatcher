@@ -1,27 +1,27 @@
 Program Idea: Auto-Generate cooking schedule
 
 Bucket = cooking role 
-	- Cooking buckets: Monday-Thursday, Study Break
-	- Non-cooking buckets: Kitchen Monster, Lounge Monster, Staples
+	* Cooking buckets: Monday-Thursday, Study Break
+	* Non-cooking buckets: Kitchen Monster, Lounge Monster, Staples
 
 Restrictions:
-	- Each person must be in exactly 1 bucket
-	- Each "bucket" must have n people
-		- Cooking: 4 people (2 per week)
-		- Staples bucket: 2+ people
-		- Kitchen Monster: 1 <= num <= Staples
-		- Lounge Monster: 1 <= num < Kitchen Monster
-	- Each person cannot be in certain buckets 
-		- can't cook that day
-		- New members must cook, can't be in non-cooking buckets
-	- 2 people must be in the same cooking bucket (must be cooking partners)
-	- 2 cooking noobs can't be in same cooking bucket
+	* Each person must be in exactly 1 bucket
+	* Each "bucket" must have n people
+		* Cooking: 4 people (2 per week)
+		* Staples bucket: 2+ people
+		* Kitchen Monster: 1 <= num <= Staples
+		* Lounge Monster: 1
+	* Each person cannot be in certain buckets 
+		* can't cook that day
+		* New members must cook, can't be in non-cooking buckets
+	* 2 people must be in the same cooking bucket (must be cooking partners)
+	* 2 cooking noobs can't be in same cooking bucket
 
 Optimizations:
-	- Seniority
-		- Non-cooking buckets should be assigned based on seniority
-	- Schedule preference
-		- Try not to put people in "bad" buckets (they'll have to show up late to cook)
+	* Seniority
+		* Non-cooking buckets should be assigned based on seniority
+	* Schedule preference
+		* Try not to put people in "bad" buckets (they'll have to show up late to cook)
 
 Rescheduling:
 	Given current schedule and new restrictions/optimizations, minimize the number of switches

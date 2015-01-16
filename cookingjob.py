@@ -1,7 +1,7 @@
 from job import *
 
 class CookingJob(Job):
-	def __init__(self, name, prefs, latestArrival=4.5, maxMatches=2):
+	def __init__(self, name, prefs, latestArrival=4.5, maxMatches=4):
 		Job.__init__(self, name, prefs, maxMatches)
 		self.latestArrival = latestArrival
 		# remove anyone who cannot arrive before 4:30 and anyone who cannot cook that day
